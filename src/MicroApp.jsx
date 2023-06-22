@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router} from 'react-router-dom'
 import './index.css';
-import App from './Main';
 
 if (window.__POWERED_BY_QIANKUN__) {
   // eslint-disable-next-line no-undef
@@ -12,30 +10,25 @@ if (window.__POWERED_BY_QIANKUN__) {
 let root = null;
 const getRoot = (container) => {
   if (!root) {
-    const rootEle = container ? container.querySelector('#root') : document.querySelector('#root');
+    const rootEle = container ? container.querySelector('root') : document.querySelector('#root');
     return ReactDOM.createRoot(rootEle);
   }
   return root;
 };
 
 function render(props) {
-  const { container } = props;
+  const { container, count } = props;
   root = getRoot(container);
 
   root.render(
     <React.StrictMode>
-      <Router basename={window.__POWERED_BY_QIANKUN__ ? '/app-react' : '/'}>
-        <App />
-      </Router>
+      <div>micro app ....</div>
+      <div>count: {count}</div>
     </React.StrictMode>);
 }
 
 if (!window.__POWERED_BY_QIANKUN__) {
   render({});
-}
-
-const handleGlobalStateChange = (state, preState) => {
-  console.log('==========state, preState: ', state, preState);
 }
 
 export async function bootstrap() {
@@ -44,8 +37,6 @@ export async function bootstrap() {
 
 export async function mount(props) {
   console.log('[react16] props from main framework', props);
-  props.onGlobalStateChange(handleGlobalStateChange)
-  props.setGlobalState({count: 66});
   render(props);
 }
 
