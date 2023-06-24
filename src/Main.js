@@ -24,9 +24,9 @@ function App() {
   return (
     <div className="App">
       <Menu theme="dark" defaultSelectedKeys={[defaultKey.current]} mode="horizontal" items={items} />
-      {/* <header className="App-header">
+      <header className="App-header">
         <img src={'./logo192.png'} className="App-logo" alt="logo" />
-      </header> */}
+      </header>
       <Routers />
     </div>
   );
